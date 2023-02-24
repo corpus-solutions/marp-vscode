@@ -99,8 +99,6 @@ export default async function runMarpCli(
   try {
     process.env.CHROME_PATH =
       marpConfiguration().get<string>('chromePath') || CHROME_PATH
-    if (!opts) opts = {}
-    //argv.push('--engine', '@corpus-solutions/marp-theme')
     exitCode = await marpCli(argv, opts)
   } catch (e) {
     console.error(e)
