@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid'
 import { TextDocument, Uri, workspace } from 'vscode'
 import { WorkFile, marpCoreOptionForCLI } from './option'
 import { marpConfiguration, writeFile, unlink } from './utils'
+const corpusEngine = require('@corpus-solutions/marp-theme');
 
 const createCleanup = (target: Uri) => async () => {
   await unlink(target)
@@ -62,12 +63,15 @@ export async function createConfigFile(
   target: TextDocument,
   opts?: Parameters<typeof marpCoreOptionForCLI>[1]
 ): Promise<WorkFile> {
-  const tmpFileName = `.marp-vscode-cli-conf-${nanoid()}.json`
+  const tmpFileName = `.marp-vscode-cli-conf-${nanoid()}.js`
   const tmpPath = path.join(tmpdir(), tmpFileName)
   const tmpUri = Uri.file(tmpPath)
 
   const cliOpts = await marpCoreOptionForCLI(target, opts)
-  await writeFile(tmpUri, JSON.stringify(cliOpts))
+  let jsCode = "var opts = " +JSON.stringify(cliOpts)
+  jsCode += "\n opts.engine = (opts) => global.engine(opts)"
+  jsCode += "\n" +  "module.exports = opts"
+  await writeFile(tmpUri, jsCode)
 
   return {
     path: tmpPath,
@@ -85,17 +89,18 @@ export default async function runMarpCli(
 ): Promise<void> {
   console.info(`Execute Marp CLI [${argv.join(' ')}] (${JSON.stringify(opts)})`)
 
-  const { marpCli, CLIError, CLIErrorCode } = await import(
+  const { marpCli, CLIError, CLIErrorCode  } = await import(
     '@marp-team/marp-cli'
   )
   const { CHROME_PATH } = process.env
 
   let exitCode: number
-
+  global.engine = corpusEngine;
   try {
     process.env.CHROME_PATH =
       marpConfiguration().get<string>('chromePath') || CHROME_PATH
-
+    if(!opts) opts = {};
+    //argv.push('--engine', '@corpus-solutions/marp-theme')
     exitCode = await marpCli(argv, opts)
   } catch (e) {
     console.error(e)

@@ -13,6 +13,7 @@ import lineNumber from './plugins/line-number'
 import outline, { rule as outlineRule } from './plugins/outline'
 import themes, { Themes } from './themes'
 import { detectMarpFromMarkdown, marpConfiguration } from './utils'
+import * as  mdFenced  from '@arothuis/markdown-it-fenced-divs'
 
 const shouldRefreshConfs = [
   'markdown.marp.breaks',
@@ -56,6 +57,7 @@ export function extendMarkdownIt(md: any) {
         .use(customTheme)
         .use(outline)
         .use(lineNumber)
+        .use(mdFenced)
 
       // Switch rules
       if (!(marpConfiguration().get<boolean>('outlineExtension') ?? true)) {
