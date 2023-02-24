@@ -1,6 +1,6 @@
 import { tmpdir } from 'os'
 import path from 'path'
-import corpusEngine = require('@corpus-solutions/marp-theme')
+import * as corpusEngine from '@corpus-solutions/marp-theme'
 import type { marpCli } from '@marp-team/marp-cli'
 import { nanoid } from 'nanoid'
 import { TextDocument, Uri, workspace } from 'vscode'
