@@ -1,6 +1,6 @@
-import { ExtensionContext, Uri, commands, workspace } from 'vscode'
 // eslint-disable-next-line import/namespace
 import * as corpusEngine from '@corpus-solutions/marp-theme'
+import { ExtensionContext, Uri, commands, workspace } from 'vscode'
 import * as exportCommand from './commands/export'
 import * as newMarpMarkdown from './commands/new-marp-markdown'
 import * as openExtensionSettings from './commands/open-extension-settings'
