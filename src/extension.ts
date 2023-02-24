@@ -1,6 +1,7 @@
-import * as mdFenced from '@arothuis/markdown-it-fenced-divs'
 import { Marp } from '@marp-team/marp-core'
 import { ExtensionContext, Uri, commands, workspace } from 'vscode'
+// eslint-disable-next-line import/namespace
+import * as corpusEngine from '@corpus-solutions/marp-theme'
 import * as exportCommand from './commands/export'
 import * as newMarpMarkdown from './commands/new-marp-markdown'
 import * as openExtensionSettings from './commands/open-extension-settings'
@@ -53,11 +54,10 @@ export function extendMarkdownIt(md: any) {
         return undefined
       })()
 
-      const marp = new Marp(marpCoreOptionForPreview(md.options))
+      const marp = corpusEngine(marpCoreOptionForPreview(md.options))
         .use(customTheme)
         .use(outline)
         .use(lineNumber)
-        .use(mdFenced)
 
       // Switch rules
       if (!(marpConfiguration().get<boolean>('outlineExtension') ?? true)) {
