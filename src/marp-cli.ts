@@ -1,5 +1,6 @@
 import { tmpdir } from 'os'
 import path from 'path'
+// eslint-disable-next-line namespace
 import * as corpusEngine from '@corpus-solutions/marp-theme'
 import type { marpCli } from '@marp-team/marp-cli'
 import { nanoid } from 'nanoid'
