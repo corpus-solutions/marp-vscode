@@ -333,6 +333,6 @@
   "dependencies": {
     "@arothuis/markdown-it-fenced-divs": "^0.2.0",
     "@marp-team/marp-cli": "^2.4.0",
-	  "@corpus-solutions/marp-theme": "0.1.0"
+    "@corpus-solutions/marp-theme": "0.1.0"
   }
 }

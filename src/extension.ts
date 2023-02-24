@@ -1,4 +1,4 @@
-import * as  mdFenced  from '@arothuis/markdown-it-fenced-divs'
+import * as mdFenced from '@arothuis/markdown-it-fenced-divs'
 import { Marp } from '@marp-team/marp-core'
 import { ExtensionContext, Uri, commands, workspace } from 'vscode'
 import * as exportCommand from './commands/export'

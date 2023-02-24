@@ -68,9 +68,9 @@ export async function createConfigFile(
   const tmpUri = Uri.file(tmpPath)
 
   const cliOpts = await marpCoreOptionForCLI(target, opts)
-  let jsCode = "var opts = " +JSON.stringify(cliOpts)
-  jsCode += "\n opts.engine = (opts) => global.engine(opts)"
-  jsCode += "\n" +  "module.exports = opts"
+  let jsCode = 'var opts = ' + JSON.stringify(cliOpts)
+  jsCode += '\n opts.engine = (opts) => global.engine(opts)'
+  jsCode += '\n' + 'module.exports = opts'
   await writeFile(tmpUri, jsCode)
 
   return {
@@ -89,17 +89,17 @@ export default async function runMarpCli(
 ): Promise<void> {
   console.info(`Execute Marp CLI [${argv.join(' ')}] (${JSON.stringify(opts)})`)
 
-  const { marpCli, CLIError, CLIErrorCode  } = await import(
+  const { marpCli, CLIError, CLIErrorCode } = await import(
     '@marp-team/marp-cli'
   )
   const { CHROME_PATH } = process.env
 
   let exitCode: number
-  global.engine = corpusEngine;
+  global.engine = corpusEngine
   try {
     process.env.CHROME_PATH =
       marpConfiguration().get<string>('chromePath') || CHROME_PATH
-    if(!opts) opts = {};
+    if (!opts) opts = {}
     //argv.push('--engine', '@corpus-solutions/marp-theme')
     exitCode = await marpCli(argv, opts)
   } catch (e) {
