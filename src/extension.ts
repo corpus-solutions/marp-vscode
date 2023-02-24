@@ -1,4 +1,3 @@
-import { Marp } from '@marp-team/marp-core'
 import { ExtensionContext, Uri, commands, workspace } from 'vscode'
 // eslint-disable-next-line import/namespace
 import * as corpusEngine from '@corpus-solutions/marp-theme'
