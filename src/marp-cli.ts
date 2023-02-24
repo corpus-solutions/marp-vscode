@@ -1,11 +1,11 @@
 import { tmpdir } from 'os'
 import path from 'path'
+import * as corpusEngine from '@corpus-solutions/marp-theme';
 import type { marpCli } from '@marp-team/marp-cli'
 import { nanoid } from 'nanoid'
 import { TextDocument, Uri, workspace } from 'vscode'
 import { WorkFile, marpCoreOptionForCLI } from './option'
 import { marpConfiguration, writeFile, unlink } from './utils'
-import * as corpusEngine from '@corpus-solutions/marp-theme';
 
 const createCleanup = (target: Uri) => async () => {
   await unlink(target)
