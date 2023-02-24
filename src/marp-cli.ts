@@ -1,7 +1,6 @@
 import { tmpdir } from 'os'
 import path from 'path'
-// eslint-disable-next-line import/namespace
-import * as corpusEngine from '@corpus-solutions/marp-theme'
+import { marpFactory } from '@corpus-solutions/marp-theme'
 import type { marpCli } from '@marp-team/marp-cli'
 import { nanoid } from 'nanoid'
 import { TextDocument, Uri, workspace } from 'vscode'
@@ -96,7 +95,7 @@ export default async function runMarpCli(
   const { CHROME_PATH } = process.env
 
   let exitCode: number
-  global.engine = corpusEngine
+  global.engine = marpFactory
   try {
     process.env.CHROME_PATH =
       marpConfiguration().get<string>('chromePath') || CHROME_PATH

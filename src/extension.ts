@@ -1,4 +1,4 @@
-import * as corpusEngine from '@corpus-solutions/marp-theme'
+import { marpFactory } from '@corpus-solutions/marp-theme'
 import { ExtensionContext, Uri, commands, workspace } from 'vscode'
 import * as exportCommand from './commands/export'
 import * as newMarpMarkdown from './commands/new-marp-markdown'
@@ -52,7 +52,7 @@ export function extendMarkdownIt(md: any) {
         return undefined
       })()
 
-      const marp = corpusEngine(marpCoreOptionForPreview(md.options))
+      const marp = marpFactory(marpCoreOptionForPreview(md.options))
         .use(customTheme)
         .use(outline)
         .use(lineNumber)
