@@ -1,3 +1,4 @@
+import * as  mdFenced  from '@arothuis/markdown-it-fenced-divs'
 import { Marp } from '@marp-team/marp-core'
 import { ExtensionContext, Uri, commands, workspace } from 'vscode'
 import * as exportCommand from './commands/export'
@@ -13,7 +14,6 @@ import lineNumber from './plugins/line-number'
 import outline, { rule as outlineRule } from './plugins/outline'
 import themes, { Themes } from './themes'
 import { detectMarpFromMarkdown, marpConfiguration } from './utils'
-import * as  mdFenced  from '@arothuis/markdown-it-fenced-divs'
 
 const shouldRefreshConfs = [
   'markdown.marp.breaks',
